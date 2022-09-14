@@ -74,10 +74,16 @@ int main()
 			initialPointIndicator.setPosition(-100, -100);
 
 			//Decalre all of the text that is referenced during input
-			Text vertexOneText("Click vertex one location", font, 16);
-			Text vertexTwoText("Click vertex two location", font, 16);
-			Text vertexThreeText("Click vertex three location", font, 16);
-			Text initialPointText("Click starting point location", font, 16);
+			Text vertexOneText("Click vertex one location", font, 30);
+			Text vertexTwoText("Click vertex two location", font, 30);
+			Text vertexThreeText("Click vertex three location", font, 30);
+			Text initialPointText("Click starting point location", font, 30);
+
+			//Center text for more convienient reading
+			vertexOneText.setPosition(480, 0);
+			vertexTwoText.setPosition(480, 0);
+			vertexThreeText.setPosition(480, 0);
+			initialPointText.setPosition(480, 0);
 
 			//Start the loop to take users input while stopping the program from deciding it really needs to do the math before the variable is actually filled
 			while (!initialPoint)
