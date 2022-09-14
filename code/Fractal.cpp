@@ -1,5 +1,7 @@
 // Include important C++ libraries here
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <vector>
 
 // Make code easier to type with "using namespace"
 using namespace sf;
@@ -21,7 +23,11 @@ int main()
 	Text text("hello, world", font, 16);
 	window.draw(text);
 
-
+	// Trying to incorporate these
+	vector<Vector2f> vertices;
+	Vector2f clicked;
+	
+	// Starter fixed variables to get the fractal math correct
 	vector<int> xPos;
 	vector<int> yPos;
 	vector<int> mousePos;
@@ -38,7 +44,6 @@ int main()
 		tempPointY,
 		randomVertex;
 
-	
 
 	while (window.isOpen())
 	{
@@ -48,6 +53,34 @@ int main()
 		Handle the players input
 		****************************************
 		*/
+
+			Event userTextPrompt;
+			while (window.pollEvent(userTextPrompt))
+			{
+			Text text("Please click first vertex location", font, 30);
+				if (userTextPrompt.type == Event::Closed)
+				{
+					window.close();
+				}
+				if (userTextPrompt.type == Event::MouseButtonPressed)
+				{
+					if (userTextPrompt.mouseButton.button == Mouse::Left)
+					{
+						std::cout << "the left button was pressed" << std::endl;
+						std::cout << "mouse x: " << userTextPrompt.mouseButton.x << std::endl;
+						std::cout << "mouse y: " << userTextPrompt.mouseButton.y << std::endl;
+
+						clicked.x = userTextPrompt.mouseButton.x;
+						clicked.y = userTextPrompt.mouseButton.y;
+
+					}
+				}
+			}
+
+
+
+
+
 
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
@@ -64,13 +97,11 @@ int main()
 
 		*/
 
-		// things we want to initialize at the start of every frame
+		// Variables we want to initialize at the start of every frame
 		randomVertex = rand() % 3;
 
-		// Clear everything from the last frame
-		window.clear();
 
-		// fractal math
+		// Fractal math
 		if (randomVertex == 1)
 		{
 			tempPointX = (inputX + pointOneX) / 2;
@@ -101,6 +132,9 @@ int main()
 			inputX = tempPointX;
 			inputY = tempPointY;
 		}
+
+		// Clear everything from the last frame
+		window.clear();
 
 		// Nevermind this worked fine
 		for (int i = 0; i < xPos.size(); i += 1)
