@@ -13,8 +13,18 @@ int main()
 	// Create and open a window for the game
 	RenderWindow window(vm, "Chaos Game", Style::Default);
 
+	// Load font
+	Font font;
+	if (!font.loadFromFile("font/times.ttf"))
+	{
+	}
+	Text text("hello, world", font, 16);
+	window.draw(text);
+
+
 	vector<int> xPos;
 	vector<int> yPos;
+	vector<int> mousePos;
 	srand(1);
 	int pointOneX = 300,
 		pointOneY = 700,
@@ -27,6 +37,8 @@ int main()
 		tempPointX,
 		tempPointY,
 		randomVertex;
+
+	
 
 	while (window.isOpen())
 	{
@@ -43,11 +55,6 @@ int main()
 		}
 
 		/*
-		****************************************
-		Update the scene
-		****************************************
-		*/
-		/*
 		Make a triangle (static for now, take 3 input later)
 		Take input inside of triangle
 		Randomly choose one of the three points of the triangle
@@ -57,15 +64,11 @@ int main()
 
 		*/
 
-		/*
-		****************************************
-		Draw the scene
-		****************************************
-		*/
-
 		// things we want to initialize at the start of every frame
 		randomVertex = rand() % 3;
-		bool isFin = false;
+
+		// Clear everything from the last frame
+		window.clear();
 
 		// fractal math
 		if (randomVertex == 1)
@@ -99,23 +102,14 @@ int main()
 			inputY = tempPointY;
 		}
 
-		// this while loop doesn't actually make it persist but im keeping it here in case it inspires some idea to make it stay
-		while (isFin != true)
+		// Nevermind this worked fine
+		for (int i = 0; i < xPos.size(); i += 1)
 		{
-			for (int i = 0; i < xPos.size(); i += 1)
-			{
-				CircleShape shape(1);
-				shape.setPosition(xPos[i], yPos[i]);
-				shape.setFillColor(Color(255, 255, 255));
-				window.draw(shape);
-			}
-			isFin = true;
+			CircleShape shape(1);
+			shape.setPosition(xPos[i], yPos[i]);
+			shape.setFillColor(Color(255, 255, 255));
+			window.draw(shape);
 		}
-
-
-		// Clear everything from the last frame
-		//window.clear();
-
 
 
 		// Show everything we just drew
