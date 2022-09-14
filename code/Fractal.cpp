@@ -62,11 +62,11 @@ int main()
 		Draw the scene
 		****************************************
 		*/
-		
-		
+
+
 		randomVertex = rand() % 3;
 		bool isFin = false;
-		
+
 
 		if (randomVertex == 1)
 		{
@@ -109,10 +109,12 @@ int main()
 			}
 			isFin = true;
 		}
-		
-		
+
+
 		// Clear everything from the last frame
 		//window.clear();
+
+
 
 		// Show everything we just drew
 		window.display();
