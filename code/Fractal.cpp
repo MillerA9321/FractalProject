@@ -63,11 +63,11 @@ int main()
 		****************************************
 		*/
 
-
+		// things we want to initialize at the start of every frame
 		randomVertex = rand() % 3;
 		bool isFin = false;
 
-
+		// fractal math
 		if (randomVertex == 1)
 		{
 			tempPointX = (inputX + pointOneX) / 2;
@@ -98,6 +98,8 @@ int main()
 			inputX = tempPointX;
 			inputY = tempPointY;
 		}
+
+		// this while loop doesn't actually make it persist but im keeping it here in case it inspires some idea to make it stay
 		while (isFin != true)
 		{
 			for (int i = 0; i < xPos.size(); i += 1)
