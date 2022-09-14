@@ -7,13 +7,13 @@ CXXFLAGS := -g -Wall -fpermissive -std=c++17
 TARGET := MakefileTutorial.out
 
 $(TARGET): $(OBJ_FILES)
-    g++ -o $@ $^ $(LDFLAGS)
+	g++ -o $@ $^ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-    g++ $(CXXFLAGS) -c -o $@ $<
+	g++ $(CXXFLAGS) -c -o $@ $<
 
 run:
-    ./$(TARGET)
+	./$(TARGET)
 
 clean:
-    rm $(TARGET) *.o
+	rm $(TARGET) *.o
