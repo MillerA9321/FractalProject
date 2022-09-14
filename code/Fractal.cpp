@@ -3,7 +3,6 @@
 
 // Make code easier to type with "using namespace"
 using namespace sf;
-using namespace std;
 
 int main()
 {
@@ -113,6 +112,8 @@ int main()
 		
 		// Clear everything from the last frame
 		//window.clear();
+
+
 
 		// Show everything we just drew
 		window.display();
