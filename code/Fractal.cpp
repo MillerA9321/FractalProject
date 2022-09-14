@@ -20,11 +20,13 @@ int main()
 	if (!font.loadFromFile("font/times.ttf"))
 	{
 	}
-	Text text("hello, world", font, 16);
-	window.draw(text);
+	//Text text("hello, world", font, 16);
+	//window.draw(text);
 
 	// Trying to incorporate these
-	vector<Vector2f> vertices;
+	bool vertexOne = false,
+		vertexTwo = false,
+		vertexThree = false;
 	Vector2f clicked;
 	
 	// Starter fixed variables to get the fractal math correct
@@ -32,12 +34,12 @@ int main()
 	vector<int> yPos;
 	vector<int> mousePos;
 	srand(1);
-	int pointOneX = 300,
-		pointOneY = 700,
-		pointTwoX = 1000,
-		pointTwoY = 700,
-		pointThreeX = 650,
-		pointThreeY = 50,
+	int pointOneX,
+		pointOneY,
+		pointTwoX,
+		pointTwoY,
+		pointThreeX,
+		pointThreeY,
 		inputX = 450,
 		inputY = 400,
 		tempPointX,
@@ -54,24 +56,96 @@ int main()
 		****************************************
 		*/
 
-			Event userTextPrompt;
-			while (window.pollEvent(userTextPrompt))
-			{
-			Text text("Please click first vertex location", font, 30);
-				if (userTextPrompt.type == Event::Closed)
-				{
-					window.close();
-				}
-				if (userTextPrompt.type == Event::MouseButtonPressed)
-				{
-					if (userTextPrompt.mouseButton.button == Mouse::Left)
-					{
-						std::cout << "the left button was pressed" << std::endl;
-						std::cout << "mouse x: " << userTextPrompt.mouseButton.x << std::endl;
-						std::cout << "mouse y: " << userTextPrompt.mouseButton.y << std::endl;
+		// Show everything we just drew
+		window.display();
 
-						clicked.x = userTextPrompt.mouseButton.x;
-						clicked.y = userTextPrompt.mouseButton.y;
+			Event userVertexPromptOne, userVertexPromptTwo, userVertexPromptThree;
+			while (!vertexThree)
+			{
+				if (!vertexOne)
+				{
+					
+					while (window.pollEvent(userVertexPromptOne))
+					{
+
+						if (userVertexPromptOne.type == Event::Closed)
+						{
+							window.close();
+						}
+						if (userVertexPromptOne.type == Event::MouseButtonPressed)
+						{
+							if (userVertexPromptOne.mouseButton.button == Mouse::Left)
+							{
+								std::cout << "1the left button was pressed" << std::endl;
+								std::cout << "mouse x: " << userVertexPromptOne.mouseButton.x << std::endl;
+								std::cout << "mouse y: " << userVertexPromptOne.mouseButton.y << std::endl;
+
+								clicked.x = userVertexPromptOne.mouseButton.x;
+								clicked.y = userVertexPromptOne.mouseButton.y;
+
+								pointOneX = clicked.x;
+								pointOneY = clicked.y;
+
+								vertexOne = true;
+							}
+						}
+
+					}
+				}
+				else if (!vertexTwo)
+				{
+					while (window.pollEvent(userVertexPromptTwo))
+					{
+						if (userVertexPromptTwo.type == Event::Closed)
+						{
+							window.close();
+						}
+						if (userVertexPromptTwo.type == Event::MouseButtonPressed)
+						{
+							if (userVertexPromptTwo.mouseButton.button == Mouse::Left)
+							{
+								std::cout << "2the left button was pressed" << std::endl;
+								std::cout << "mouse x: " << userVertexPromptTwo.mouseButton.x << std::endl;
+								std::cout << "mouse y: " << userVertexPromptTwo.mouseButton.y << std::endl;
+
+								clicked.x = userVertexPromptTwo.mouseButton.x;
+								clicked.y = userVertexPromptTwo.mouseButton.y;
+
+								pointTwoX = clicked.x;
+								pointTwoY = clicked.y;
+
+								vertexTwo = true;
+							}
+						}
+
+					}
+				}
+
+				else if(!vertexThree)
+				{
+					while (window.pollEvent(userVertexPromptThree))
+					{
+						if (userVertexPromptThree.type == Event::Closed)
+						{
+							window.close();
+						}
+						if (userVertexPromptThree.type == Event::MouseButtonPressed)
+						{
+							if (userVertexPromptThree.mouseButton.button == Mouse::Left)
+							{
+								std::cout << "3the left button was pressed" << std::endl;
+								std::cout << "mouse x: " << userVertexPromptThree.mouseButton.x << std::endl;
+								std::cout << "mouse y: " << userVertexPromptThree.mouseButton.y << std::endl;
+
+								clicked.x = userVertexPromptThree.mouseButton.x;
+								clicked.y = userVertexPromptThree.mouseButton.y;
+
+								pointThreeX = clicked.x;
+								pointThreeY = clicked.y;
+
+								vertexThree = true;
+							}
+						}
 
 					}
 				}
@@ -102,53 +176,50 @@ int main()
 
 
 		// Fractal math
-		if (randomVertex == 1)
-		{
-			tempPointX = (inputX + pointOneX) / 2;
-			tempPointY = (inputY + pointOneY) / 2;
+			if (randomVertex == 1)
+			{
+				tempPointX = (inputX + pointOneX) / 2;
+				tempPointY = (inputY + pointOneY) / 2;
 
-			xPos.push_back(tempPointX);
-			yPos.push_back(tempPointY);
-			inputX = tempPointX;
-			inputY = tempPointY;
-		}
-		else if (randomVertex == 2)
-		{
-			tempPointX = (inputX + pointTwoX) / 2;
-			tempPointY = (inputY + pointTwoY) / 2;
+				xPos.push_back(tempPointX);
+				yPos.push_back(tempPointY);
+				inputX = tempPointX;
+				inputY = tempPointY;
+			}
+			else if (randomVertex == 2)
+			{
+				tempPointX = (inputX + pointTwoX) / 2;
+				tempPointY = (inputY + pointTwoY) / 2;
 
-			xPos.push_back(tempPointX);
-			yPos.push_back(tempPointY);
-			inputX = tempPointX;
-			inputY = tempPointY;
-		}
-		else
-		{
-			tempPointX = (inputX + pointThreeX) / 2;
-			tempPointY = (inputY + pointThreeY) / 2;
+				xPos.push_back(tempPointX);
+				yPos.push_back(tempPointY);
+				inputX = tempPointX;
+				inputY = tempPointY;
+			}
+			else
+			{
+				tempPointX = (inputX + pointThreeX) / 2;
+				tempPointY = (inputY + pointThreeY) / 2;
 
-			xPos.push_back(tempPointX);
-			yPos.push_back(tempPointY);
-			inputX = tempPointX;
-			inputY = tempPointY;
-		}
+				xPos.push_back(tempPointX);
+				yPos.push_back(tempPointY);
+				inputX = tempPointX;
+				inputY = tempPointY;
+			}
 
-		// Clear everything from the last frame
-		window.clear();
+			// Clear everything from the last frame
+			window.clear();
 
-		// Nevermind this worked fine
-		for (int i = 0; i < xPos.size(); i += 1)
-		{
-			CircleShape shape(1);
-			shape.setPosition(xPos[i], yPos[i]);
-			shape.setFillColor(Color(255, 255, 255));
-			window.draw(shape);
-		}
+			// Nevermind this worked fine
+			for (int i = 0; i < xPos.size(); i += 1)
+			{
+				CircleShape shape(1);
+				shape.setPosition(xPos[i], yPos[i]);
+				shape.setFillColor(Color(255, 255, 255));
+				window.draw(shape);
+			}
 
-
-		// Show everything we just drew
-		window.display();
-
+		
 
 	}
 
