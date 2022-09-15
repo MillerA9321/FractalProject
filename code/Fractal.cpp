@@ -26,7 +26,6 @@ int main()
 		vertexTwo = false,
 		vertexThree = false,
 		initialPoint = false;
-	Vector2f clicked;
 	
 	// Starter fixed variables to get the fractal math correct
 	vector<int> xPos;
@@ -101,30 +100,35 @@ int main()
 						}
 						if (userVertexPromptOne.type == Event::MouseButtonPressed)
 						{
+							//Essentially gets position of mouse click and sanity checks by saying in console which click was taken and where it was
 							if (userVertexPromptOne.mouseButton.button == Mouse::Left)
 							{
+								//This is the sanity check (this code was demonstrated in class)
 								std::cout << "The first point is taken" << std::endl;
 								std::cout << "mouse x: " << userVertexPromptOne.mouseButton.x << std::endl;
 								std::cout << "mouse y: " << userVertexPromptOne.mouseButton.y << std::endl;
 
-								clicked.x = userVertexPromptOne.mouseButton.x;
-								clicked.y = userVertexPromptOne.mouseButton.y;
+								//Store user click position
+								pointOneX = userVertexPromptOne.mouseButton.x;
+								pointOneY = userVertexPromptOne.mouseButton.y;
 
-								pointOneX = clicked.x;
-								pointOneY = clicked.y;
-
+								//Set the indicator shape position to the click position and set its color to differentiate
 								vertexOneIndicator.setPosition(pointOneX, pointOneY);
 								vertexOneIndicator.setFillColor(Color(255, 0, 0));
 
+								//Set the bool vertex check to true in order to progress to the next point
 								vertexOne = true;
 							}
 						}
+
+						// This group of code clears the previous frame, stops text from stacking, and then prints the corresponding indicator (red dot) and text 
 						window.clear();
 						window.draw(vertexOneIndicator);
 						window.draw(vertexOneText);
 						window.display();
 					}
 				}
+				//Repeat for vertex two
 				else if (!vertexTwo)
 				{
 					while (window.pollEvent(userVertexPromptTwo))
@@ -141,11 +145,8 @@ int main()
 								std::cout << "mouse x: " << userVertexPromptTwo.mouseButton.x << std::endl;
 								std::cout << "mouse y: " << userVertexPromptTwo.mouseButton.y << std::endl;
 
-								clicked.x = userVertexPromptTwo.mouseButton.x;
-								clicked.y = userVertexPromptTwo.mouseButton.y;
-
-								pointTwoX = clicked.x;
-								pointTwoY = clicked.y;
+								pointTwoX = userVertexPromptTwo.mouseButton.x;
+								pointTwoY = userVertexPromptTwo.mouseButton.y;
 
 								vertexTwoIndicator.setPosition(pointTwoX, pointTwoY);
 								vertexTwoIndicator.setFillColor(Color(255, 0, 0));
@@ -161,7 +162,7 @@ int main()
 
 					}
 				}
-
+				//Repeat for vertex three
 				else if(!vertexThree)
 				{
 					while (window.pollEvent(userVertexPromptThree))
@@ -178,11 +179,8 @@ int main()
 								std::cout << "mouse x: " << userVertexPromptThree.mouseButton.x << std::endl;
 								std::cout << "mouse y: " << userVertexPromptThree.mouseButton.y << std::endl;
 
-								clicked.x = userVertexPromptThree.mouseButton.x;
-								clicked.y = userVertexPromptThree.mouseButton.y;
-
-								pointThreeX = clicked.x;
-								pointThreeY = clicked.y;
+								pointThreeX = userVertexPromptThree.mouseButton.x;
+								pointThreeY = userVertexPromptThree.mouseButton.y;
 
 								vertexThreeIndicator.setPosition(pointThreeX, pointThreeY);
 								vertexThreeIndicator.setFillColor(Color(255, 0, 0));
@@ -198,7 +196,7 @@ int main()
 						window.display();
 					}
 				}
-
+				//Repeat for the user initialization point
 				else if (!initialPoint)
 				{
 					while (window.pollEvent(initialPointPrompt))
@@ -215,11 +213,8 @@ int main()
 								std::cout << "mouse x: " << initialPointPrompt.mouseButton.x << std::endl;
 								std::cout << "mouse y: " << initialPointPrompt.mouseButton.y << std::endl;
 
-								clicked.x = initialPointPrompt.mouseButton.x;
-								clicked.y = initialPointPrompt.mouseButton.y;
-
-								inputX = clicked.x;
-								inputY = clicked.y;
+								inputX = initialPointPrompt.mouseButton.x;
+								inputY = initialPointPrompt.mouseButton.y;
 
 								initialPointIndicator.setPosition(inputX, inputY);
 								initialPointIndicator.setFillColor(Color(255, 0, 0));
@@ -240,7 +235,7 @@ int main()
 
 
 
-
+		// Exit program if escape is pressed
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			window.close();
@@ -265,6 +260,7 @@ int main()
 			inputX = tempPointX;
 			inputY = tempPointY;
 		}
+		//Same explanation above but for vertex two
 		else if (randomVertex == 2)
 		{
 			tempPointX = (inputX + pointTwoX) / 2;
@@ -276,6 +272,7 @@ int main()
 			inputX = tempPointX;
 			inputY = tempPointY;
 		}
+		//Same explanation above but for vertex three
 		else
 		{
 			tempPointX = (inputX + pointThreeX) / 2;
