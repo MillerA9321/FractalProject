@@ -10,8 +10,10 @@ using namespace std;
 //Begin program
 int main()
 {
-	//Create a video mode object, in this case a 720p window
-	VideoMode vm(1280, 720);
+	//Create a video mode object, in this case a 720p window but the numbers can be changed to fit whatevr. The declaration here allows for text centering depending on what you'd like
+	int windowWidth = 1280,
+		windowHeight = 720;
+	VideoMode vm(windowWidth, windowHeight);
 
 	//Create and open a window for the game
 	RenderWindow window(vm, "Chaos Game", Style::Default);
@@ -84,10 +86,10 @@ int main()
 			Text initialPointText("Click starting point location", font, 30);
 
 			//Center text for more convienient reading
-			vertexOneText.setPosition(480, 0);
-			vertexTwoText.setPosition(480, 0);
-			vertexThreeText.setPosition(480, 0);
-			initialPointText.setPosition(480, 0);
+			vertexOneText.setPosition(windowWidth/2 - 120, 0);
+			vertexTwoText.setPosition(windowWidth / 2 - 120, 0);
+			vertexThreeText.setPosition(windowWidth / 2 - 120, 0);
+			initialPointText.setPosition(windowWidth / 2 - 120, 0);
 
 			//Start the loop to take users input while stopping the program from deciding it really needs to do the math before the variable is actually filled
 			while (!initialPoint)
