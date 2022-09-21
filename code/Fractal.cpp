@@ -1,21 +1,22 @@
-// Include important C++ libraries here
+//Include important C++ libraries here
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 
-// Make code easier to type with "using namespace"
+//Make code easier to type with "using namespace"
 using namespace sf;
 using namespace std;
 
+//Begin program
 int main()
 {
-	// Create a video mode object, in this case a 720p window
+	//Create a video mode object, in this case a 720p window
 	VideoMode vm(1280, 720);
 
-	// Create and open a window for the game
+	//Create and open a window for the game
 	RenderWindow window(vm, "Chaos Game", Style::Default);
 
-	// Load font and throw console error if font file not found
+	//Load font and throw console error if font file not found
 	Font font;
 	if (!font.loadFromFile("font/times.ttf"))
 	{
@@ -55,7 +56,7 @@ int main()
 		****************************************
 		*/
 
-		// This fixed the white screen bug and I couldn't tell you why
+		//This fixed the white screen bug and I couldn't tell you why
 		window.display();
 
 			//Declare all of the user input variables
@@ -70,7 +71,7 @@ int main()
 						vertexThreeIndicator(5),
 						initialPointIndicator(5);
 
-			//Move the shapes so that they dont stack in the default position (top left)
+			//Move the indicator shapes so that they dont stack in the default position (top left)
 			vertexOneIndicator.setPosition(-100, -100);
 			vertexTwoIndicator.setPosition(-100, -100);
 			vertexThreeIndicator.setPosition(-100, -100);
@@ -97,14 +98,8 @@ int main()
 				//Gets user input for vertex one and verifies which point it gets through console using a number
 				if (!vertexOne)
 				{
-					
 					while (window.pollEvent(userVertexPromptOne))
 					{
-
-						if (userVertexPromptOne.type == Event::Closed)
-						{
-							window.close();
-						}
 						if (userVertexPromptOne.type == Event::MouseButtonPressed)
 						{
 							//Essentially gets position of mouse click and sanity checks by saying in console which click was taken and where it was
@@ -128,22 +123,19 @@ int main()
 							}
 						}
 
-						// This group of code clears the previous frame, stops text from stacking, and then prints the corresponding indicator (red dot) and text 
+						//This group of code clears the previous frame, stops text from stacking, and then prints the corresponding indicator (red dot) and text 
 						window.clear();
 						window.draw(vertexOneIndicator);
 						window.draw(vertexOneText);
 						window.display();
 					}
 				}
+
 				//Repeat for vertex two
 				else if (!vertexTwo)
 				{
 					while (window.pollEvent(userVertexPromptTwo))
 					{
-						if (userVertexPromptTwo.type == Event::Closed)
-						{
-							window.close();
-						}
 						if (userVertexPromptTwo.type == Event::MouseButtonPressed)
 						{
 							if (userVertexPromptTwo.mouseButton.button == Mouse::Left)
@@ -169,15 +161,12 @@ int main()
 
 					}
 				}
+
 				//Repeat for vertex three
 				else if(!vertexThree)
 				{
 					while (window.pollEvent(userVertexPromptThree))
 					{
-						if (userVertexPromptThree.type == Event::Closed)
-						{
-							window.close();
-						}
 						if (userVertexPromptThree.type == Event::MouseButtonPressed)
 						{
 							if (userVertexPromptThree.mouseButton.button == Mouse::Left)
@@ -203,15 +192,12 @@ int main()
 						window.display();
 					}
 				}
+
 				//Repeat for the user initialization point
 				else if (!initialPoint)
 				{
 					while (window.pollEvent(initialPointPrompt))
 					{
-						if (initialPointPrompt.type == Event::Closed)
-						{
-							window.close();
-						}
 						if (initialPointPrompt.type == Event::MouseButtonPressed)
 						{
 							if (initialPointPrompt.mouseButton.button == Mouse::Left)
@@ -243,9 +229,7 @@ int main()
 				}
 			}
 
-
-
-		// Exit program if escape is pressed
+		//Exit program if escape is pressed
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
 			window.close();
@@ -254,12 +238,12 @@ int main()
 		//Chooses a random vertex at the start of every frame
 		randomVertex = rand() % 3;
 
-
 		/*
 		****************************************
 		Handle the Fractal Math
 		****************************************
 		*/
+
 		if (randomVertex == 1)
 		{
 			//Temp point to hold the new coordinates
