@@ -22,15 +22,16 @@ int main()
 		std::cout << "Error: Font File" << std::endl;
 	}
 
-	//Declaration chunk, these are all used throughout different parts of the program so we need them ""globally"" reference-able
+	//Declaration chunk, these are all used throughout different parts of the program so decaring them here makes it easier than redclaring in several loops. 
 	bool vertexOne = false,
-		vertexTwo = false,
-		vertexThree = false,
-		initialPoint = false;
-	vector<int> xPos;
-	vector<int> yPos;
-	vector<int> mousePos;
-	srand(1);
+		 vertexTwo = false,
+		 vertexThree = false,
+		 initialPoint = false;
+
+	vector<int> xPos,
+				yPos,
+				mousePos;
+
 	int pointOneX,
 		pointOneY,
 		pointTwoX,
@@ -39,11 +40,12 @@ int main()
 		pointThreeY,
 		inputX,
 		inputY,
-		tempPointX,
-		tempPointY,
 		randomVertex;
 
+	//Init random so that random Verticies can be chosen
+	srand(1);
 
+	//Open the window and begin the loop(s)
 	while (window.isOpen())
 	{
 
@@ -57,13 +59,16 @@ int main()
 		window.display();
 
 			//Declare all of the user input variables
-			Event userVertexPromptOne, userVertexPromptTwo, userVertexPromptThree, initialPointPrompt;
+			Event userVertexPromptOne,
+				  userVertexPromptTwo,
+				  userVertexPromptThree,
+				  initialPointPrompt;
 
 			//Declare all of the shapes that are referenced during input
 			CircleShape vertexOneIndicator(5),
-				vertexTwoIndicator(5),
-				vertexThreeIndicator(5),
-				initialPointIndicator(5);
+						vertexTwoIndicator(5),
+						vertexThreeIndicator(5),
+						initialPointIndicator(5);
 
 			//Move the shapes so that they dont stack in the default position (top left)
 			vertexOneIndicator.setPosition(-100, -100);
@@ -86,6 +91,9 @@ int main()
 			//Start the loop to take users input while stopping the program from deciding it really needs to do the math before the variable is actually filled
 			while (!initialPoint)
 			{
+				//This handles player click inputs. Used for storing X and Y coordinates in the vectors. Declared here because it is used throughout this loop and this loop only.
+				Vector2f clicked;
+
 				//Gets user input for vertex one and verifies which point it gets through console using a number
 				if (!vertexOne)
 				{
@@ -212,8 +220,11 @@ int main()
 								std::cout << "mouse x: " << initialPointPrompt.mouseButton.x << std::endl;
 								std::cout << "mouse y: " << initialPointPrompt.mouseButton.y << std::endl;
 
-								inputX = initialPointPrompt.mouseButton.x;
-								inputY = initialPointPrompt.mouseButton.y;
+								clicked.x = initialPointPrompt.mouseButton.x;
+								clicked.y = initialPointPrompt.mouseButton.y;
+
+								inputX = clicked.x;
+								inputY = clicked.y;
 
 								initialPointIndicator.setPosition(inputX, inputY);
 								initialPointIndicator.setFillColor(Color(255, 0, 0));
@@ -244,12 +255,16 @@ int main()
 		randomVertex = rand() % 3;
 
 
-		//Fractal math
+		/*
+		****************************************
+		Handle the Fractal Math
+		****************************************
+		*/
 		if (randomVertex == 1)
 		{
 			//Temp point to hold the new coordinates
-			tempPointX = (inputX + pointOneX) / 2;
-			tempPointY = (inputY + pointOneY) / 2;
+			int tempPointX = (inputX + pointOneX) / 2;
+			int tempPointY = (inputY + pointOneY) / 2;
 
 			//Pushes new coordinates into the end of the vertex
 			xPos.push_back(tempPointX);
@@ -262,8 +277,8 @@ int main()
 		//Same explanation above but for vertex two
 		else if (randomVertex == 2)
 		{
-			tempPointX = (inputX + pointTwoX) / 2;
-			tempPointY = (inputY + pointTwoY) / 2;
+			int tempPointX = (inputX + pointTwoX) / 2;
+			int tempPointY = (inputY + pointTwoY) / 2;
 
 			xPos.push_back(tempPointX);
 			yPos.push_back(tempPointY);
@@ -274,8 +289,8 @@ int main()
 		//Same explanation above but for vertex three
 		else
 		{
-			tempPointX = (inputX + pointThreeX) / 2;
-			tempPointY = (inputY + pointThreeY) / 2;
+			int tempPointX = (inputX + pointThreeX) / 2;
+			int tempPointY = (inputY + pointThreeY) / 2;
 
 			xPos.push_back(tempPointX);
 			yPos.push_back(tempPointY);
@@ -283,6 +298,12 @@ int main()
 			inputX = tempPointX;
 			inputY = tempPointY;
 		}
+
+		/*
+		****************************************
+		Display points in vector
+		****************************************
+		*/
 
 		//Clear everything from the last frame
 		window.clear();
